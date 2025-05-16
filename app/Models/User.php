@@ -45,4 +45,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    // Um usuário pode ter vários posts
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
+    }
+
+    // Se futuramente quiser relacionar anúncios criados por usuário
+    // public function ads()
+    // {
+    //     return $this->hasMany(Ad::class);
+    // }
+
 }
