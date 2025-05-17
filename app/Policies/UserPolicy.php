@@ -22,8 +22,10 @@ class UserPolicy
      */
     public function view(User $authUser, User $user): bool
     {
-        return in_array($authUser->role, ['admin', 'editor']);
+        return $authUser->role === 'admin'
+            || ($authUser->role === 'editor' && $authUser->id === $user->id);
     }
+
 
     /**
      * Determine whether the user can create models.

@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\UserResource\Pages\Profile;
 use App\Http\Middleware\EnsureUserIsAdminOrEditor;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -18,6 +19,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationItem;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,6 +39,21 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
+            ])
+            ->navigationItems([
+                NavigationItem::make('Meu Perfil')
+                    ->icon('heroicon-o-user')
+                    ->group('Conta')
+                    ->url(fn (): string =>
+                        // usa a rota de edição já existente,
+                        // passando o ID do usuário logado
+                        route('filament.admin.resources.users.edit', [
+                            'record' => Auth::id(),
+                        ])
+                    )
+                    ->visible(fn (): bool =>
+                        in_array(Auth::user()->role, ['admin','editor'])
+                    ),
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
