@@ -9,6 +9,21 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'excerpt',
+        'content',
+        'cover',
+        'status',
+        'published_at',
+        'is_featured',
+        'comments_enabled',
+        'comments_count',
+        'user_id',
+        'category_id',
+    ];
+
     // Autor do post
     public function author()
     {

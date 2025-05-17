@@ -9,6 +9,11 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'slug',
+    ];
+
     // Tag pertence a muitos posts (pivot post_tag)
     public function posts()
     {
