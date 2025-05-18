@@ -18,8 +18,6 @@ return new class extends Migration
             $table->text('html_code')->nullable();
             $table->enum('type', ['image', 'script'])->default('image');
             $table->string('link')->nullable();
-            $table->string('position'); // Ex: 'sidebar_top', 'footer', etc.
-            $table->foreignId('post_id')->nullable()->constrained()->nullOnDelete();
             $table->boolean('is_active')->default(true);
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
