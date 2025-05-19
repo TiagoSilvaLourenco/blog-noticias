@@ -10,6 +10,8 @@ use App\Models\Tag;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,16 +20,75 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory(5)->create();
-        Tag::factory(10)->create();
-        User::factory(5)->create();
+         // Criar usuários fixos
+        $tiago = User::updateOrCreate(
+            ['email' => 'tiago@test.com'],
+            [
+                'name' => 'Tiago',
+                'password' => Hash::make('12345678'),
+                'role' => 'admin',
+                'status' => true,
+            ]
+        );
 
-        Post::factory(20)->create()->each(function ($post) {
-            $tags = \App\Models\Tag::inRandomOrder()->take(rand(1, 3))->pluck('id');
+        $editor = User::updateOrCreate(
+            ['email' => 'editor@test.com'],
+            [
+                'name' => 'Editor',
+                'password' => Hash::make('12345678'),
+                'role' => 'editor',
+                'status' => true,
+            ]
+        );
+
+        // Categorias fixas
+        $categorias = [
+            'Política', 'Esportes', 'Saúde', 'Policial', 'Cidades', 'Utilidade Pública'
+        ];
+
+        foreach ($categorias as $cat) {
+            Category::updateOrCreate(['name' => $cat], [
+                'slug' => Str::slug($cat),
+                'description' => $cat
+            ]);
+        }
+
+        // Tags temáticas
+        $tags = [
+            'Governo', 'Eleições', 'Orçamento Público', 'Transparência', 'Prefeitura',
+            'Esporte Amador', 'Campeonato', 'Hospital', 'Vacinação', 'Unidade de Saúde',
+            'Polícia Civil', 'Ocorrência', 'Trânsito', 'Mobilidade Urbana',
+            'Educação Pública', 'Saneamento', 'Projetos Sociais', 'Cultura', 'Feira Livre',
+            'Audiência Pública'
+        ];
+
+        foreach ($tags as $tag) {
+            Tag::updateOrCreate(['name' => $tag], [
+                'slug' => Str::slug($tag)
+            ]);
+        }
+
+        // IDs fixos para usuários e categorias
+        $userIds = [$tiago->id, $editor->id];
+        $categoryIds = Category::pluck('id')->toArray();
+        $tagIds = Tag::pluck('id')->toArray();
+
+        // Gerar 50 posts
+        Post::factory(50)->create()->each(function ($post) use ($userIds, $categoryIds, $tagIds) {
+            $post->user_id = collect($userIds)->random();
+            $post->category_id = collect($categoryIds)->random();
+            $post->save();
+
+            $tags = collect($tagIds)->random(rand(2, 4));
             $post->tags()->attach($tags);
         });
 
-        Comment::factory(40)->create();
+         // Seed de posições
+        $this->call(PositionSeeder::class);
+
+        // Gerar anúncios
         Ad::factory(5)->create();
+
+
     }
 }

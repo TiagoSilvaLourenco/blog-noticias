@@ -20,8 +20,6 @@ class AdFactory extends Factory
             'html_code' => null,
             'type' => 'image',
             'link' => $this->faker->url,
-            'position' => $this->faker->randomElement(['sidebar_top', 'sidebar_bottom', 'footer']),
-            'post_id' => null, // ou associe depois manualmente
             'is_active' => true,
             'start_at' => now()->subDays(5),
             'end_at' => now()->addDays(30),
