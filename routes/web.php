@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\PostController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+
+// Route::get('/api/ping', fn () => 'pong');
+// Route::get('/api/posts', [PostController::class, 'index']);
 
 Route::get('/', function () {
     return Inertia::render('welcome');
