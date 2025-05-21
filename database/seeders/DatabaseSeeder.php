@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Ad;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Position;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -87,8 +88,16 @@ class DatabaseSeeder extends Seeder
         $this->call(PositionSeeder::class);
 
         // Gerar anúncios
-        Ad::factory(5)->create();
+        $ads = Ad::factory(5)->create();
 
+        $positionIds = Position::pluck('id')->toArray();
+
+        // Para cada Ad, associe de 1 a 3 posições aleatórias:
+        foreach ($ads as $ad) {
+            $take = rand(1, 3);
+            $ids  = collect($positionIds)->shuffle()->take($take)->toArray();
+            $ad->positions()->sync($ids);
+        }
 
     }
 }

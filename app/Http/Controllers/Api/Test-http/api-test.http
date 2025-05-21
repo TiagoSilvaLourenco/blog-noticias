@@ -3,7 +3,9 @@ GET http://localhost:8000/api/posts
 
 ### Listar posts com paginação
 GET http://localhost:8000/api/posts?page=2
+
 ### Listar posts com paginação e filtro
+GET http://localhost:8000/api/posts/fugit-autem-corrupti-magnam-aspernatur-voluptatem-accusantium-autem
 
 ### Ver post específico
 GET http://localhost:8000/api/posts?category=saude
@@ -20,5 +22,8 @@ GET http://localhost:8000/api/ads?position=home_top
 
 ### Listar anúncios
 GET http://localhost:8000/api/ads
+
+### Listar posições de anúncios
+GET http://localhost:8000/api/ads/positions
 
 
