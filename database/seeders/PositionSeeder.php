@@ -10,8 +10,9 @@ class PositionSeeder extends Seeder
     public function run(): void
     {
         $positions = [
-            ['code' => 'home_top',          'label' => 'Top (Home)',             'width' => 970, 'height' => 90],
+            ['code' => 'home_top',          'label' => 'Top (Home)',             'width' => 970, 'height' => 200],
             ['code' => 'home_middle',       'label' => 'Middle (Home)',          'width' => 728, 'height' => 90],
+            ['code' => 'home_cards',        'label' => 'Cards (Home)',           'width' => 728, 'height' => 90],
             ['code' => 'home_middle_sidebar','label' => 'Middle Sidebar (Home)', 'width' => 300, 'height' => 600],
             ['code' => 'home_bottom',       'label' => 'Bottom (Home)',          'width' => 728, 'height' => 90],
             ['code' => 'home_bottom_sidebar','label' => 'Bottom Sidebar (Home)', 'width' => 300, 'height' => 600],

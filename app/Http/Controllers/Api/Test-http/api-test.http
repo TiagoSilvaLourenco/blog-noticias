@@ -26,4 +26,15 @@ GET http://localhost:8000/api/ads
 ### Listar posições de anúncios
 GET http://localhost:8000/api/ads/positions
 
+### Enviar contato type is advertise or contact
+POST http://localhost:8000/api/contacts
+Content-Type: application/json
 
+{
+  "name": "Tiago",
+  "email": "t@t.com",
+  "phone": "123456789",
+  "type": "advertise",
+  "company": "Teste Ltda",
+  "message": "Olá, quero anunciar..."
+}
