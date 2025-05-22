@@ -8,7 +8,7 @@ return [
 
     // ❗ Apenas seu domínio
     // Caso use porta diferente no dev (ex: Next.js)
-    'allowed_origins' => ['http://localhost:8080', 'https://portalesnoticias.com.br'],
+    'allowed_origins' => ['http://localhost:8080', 'http://localhost:3000', 'https://portalesnoticias.com.br'],
 
     'allowed_headers' => ['*'],
 

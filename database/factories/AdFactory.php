@@ -14,9 +14,12 @@ class AdFactory extends Factory
 
     public function definition(): array
     {
+        $width  = 300;
+        $height = 250;
+
         return [
             'title' => $this->faker->company,
-            'image' => $this->faker->imageUrl(300, 250, 'business', true),
+            'image'      => "https://picsum.photos/{$width}/{$height}?random=" . $this->faker->numberBetween(1,5)."?grayscale",
             'html_code' => null,
             'type' => 'image',
             'link' => $this->faker->url,

@@ -30,7 +30,11 @@ class AdResource extends Resource
 {
     protected static ?string $model = Ad::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationLabel = 'Anúncio';
+    protected static ?string $pluralLabel     = 'Anúncios';
+
+    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
     public static function form(Form $form): Form
     {

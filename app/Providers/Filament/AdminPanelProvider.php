@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\ContactResource;
 use App\Filament\Resources\UserResource\Pages\Profile;
 use App\Http\Middleware\EnsureUserIsAdminOrEditor;
 use Filament\Http\Middleware\Authenticate;
@@ -72,7 +73,6 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                // Authenticate::class,
                 Authenticate::class,
                 EnsureUserIsAdminOrEditor::class,
             ]);

@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'slug' => Str::slug($title),
             'excerpt' => $this->faker->paragraph,
             'content' => $this->faker->paragraphs(3, true),
-            'cover' => $this->faker->imageUrl(800, 600, 'nature', true),
+            'cover'      => "https://picsum.photos/800/600?random=" . $this->faker->numberBetween(3,10)."?grayscale",
             'status' => $this->faker->randomElement(['draft', 'published']),
             'published_at' => now(),
             'is_featured' => $this->faker->boolean(30),

@@ -19,6 +19,8 @@ class AdResource extends JsonResource
             'positions' => $this->positions->pluck('code'),
             'image'     => $this->image,
             'url'       => $this->link,
+            'width'     => $this->positions->first()?->width,   // supondo que Position tem width/height
+            'height'    => $this->positions->first()?->height,
         ];
     }
 }
