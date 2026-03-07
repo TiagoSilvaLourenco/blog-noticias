@@ -9,8 +9,8 @@ use Inertia\Inertia;
 // Route::get('/api/posts', [PostController::class, 'index']);
 
 Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+    return redirect('/admin');
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
