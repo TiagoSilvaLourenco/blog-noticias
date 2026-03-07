@@ -14,7 +14,7 @@ class PostResource extends JsonResource
             'slug' => $this->slug,
             'excerpt' => $this->excerpt,
             'content' => $this->content,
-            'cover' => $this->cover,
+            'cover' => $this->cover ? asset('storage/' . $this->cover) : null,
             'published_at' => $this->published_at,
             'is_featured' => $this->is_featured,
             'tags' => $this->tags->map->only(['id', 'name', 'slug']),
