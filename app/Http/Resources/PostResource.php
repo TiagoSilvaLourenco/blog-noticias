@@ -24,7 +24,7 @@ class PostResource extends JsonResource
 
             'author' => $this->user
                 ? [
-                    'name' => $this->user->name,
+                    'name' => $this->author?->name ?? 'Autor Desconhecido',
                     'email' => $this->user->email,
                 ]
                 : null,
