@@ -24,6 +24,10 @@ class Post extends Model
         'category_id',
     ];
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     // Autor do post
     public function author()
     {

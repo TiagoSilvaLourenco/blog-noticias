@@ -11,7 +11,15 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::call(function () {
-    Post::where('status', 'schedule')
-        ->where('published_at', '<=', Carbon::now())
-        ->update(['status' => 'published']);
+    // Busca posts agendados que já passaram da hora
+    $posts = Post::where('status', 'schedule')
+                 ->where('published_at', '<=', Carbon::now())
+                 ->get();
+
+    foreach ($posts as $post) {
+        $post->update([
+            'status' => 'published',
+            'published_at' => $post->published_at ?? Carbon::now() // Garante a data
+        ]);
+    }
 })->everyMinute();
