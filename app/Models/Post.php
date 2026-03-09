@@ -28,6 +28,19 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
+    // Adicione isto:
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($post) {
+            // Se o status for publicado e não tiver data, define agora
+            if ($post->status === 'published' && is_null($post->published_at)) {
+                $post->published_at = now();
+            }
+        });
+    }
+
     // Autor do post
     public function author()
     {

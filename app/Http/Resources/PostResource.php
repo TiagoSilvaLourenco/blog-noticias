@@ -9,13 +9,15 @@ class PostResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        $date = $this->published_at ?? $this->created_at ?? now();
+
         return [
             'title' => $this->title,
             'slug' => $this->slug,
             'excerpt' => $this->excerpt,
             'content' => $this->content,
             'cover' => $this->cover ? asset('storage/' . $this->cover) : null,
-            'published_at' => ($this->published_at ?? $this->created_at)->format('d/m/Y H:i'),
+            'published_at' => $date->format('d/m/Y H:i'),
             'is_featured' => $this->is_featured,
             'tags' => $this->tags->map->only(['id', 'name', 'slug']),
             'category' => $this->category
