@@ -101,6 +101,7 @@ class PostResource extends Resource
                     )
                     ->required(),
                 DateTimePicker::make('published_at')
+                    ->default(now())
                     ->label('Data de Publicação')
                     ->visible(fn (callable $get) => $get('status') === 'schedule')
                     ->required(fn (callable $get) => $get('status') === 'schedule'),
