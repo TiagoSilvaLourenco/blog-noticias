@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->domain('admin.portalesnoticias.com.br')
+            ->domain(env('FILAMENT_DOMAIN'))
             ->login()
             ->colors([
                 'primary' => Color::Amber,

@@ -35,7 +35,9 @@ class Post extends Model
 
         static::saving(function ($post) {
             // Se o status for publicado e não tiver data, define agora
-            if ($post->status === 'published' && is_null($post->published_at)) {
+            $status = strtolower($post->status);
+
+            if ($status === 'published' && empty($post->published_at)) {
                 $post->published_at = now();
             }
         });
