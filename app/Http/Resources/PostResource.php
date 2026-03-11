@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'cover' => $this->cover
     ? (str_starts_with($this->cover, 'http') ? $this->cover : asset('storage/' . $this->cover))
     : null,
-            'published_at' => $date->format('d/m/Y H:i'),
+            'published_at' => $date ? $date->format('d/m/Y H:i') : null,
             'is_featured' => $this->is_featured,
             'tags' => $this->tags->map->only(['id', 'name', 'slug']),
             'category' => $this->category
